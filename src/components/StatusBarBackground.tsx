@@ -5,6 +5,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 const StatusBarBackground = ({ color = '#7c7a7a' }) => {
   const insets = useSafeAreaInsets();
 
+  // hello how are you
+
   return (
 
       <View
