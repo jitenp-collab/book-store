@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { AppState, StyleSheet } from 'react-native';
 import React, { useCallback, useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -23,6 +23,7 @@ import { activeUser } from '../redux/redusers/reducers';
 import { loginUser, recieveMessage } from '../const/Const';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { socket } from '../redux/Services/messageApi';
+import { current } from '@reduxjs/toolkit';
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
@@ -93,6 +94,21 @@ const Navigation = () => {
             }
           }
         }
+
+        if (notification.userInteraction && !notification.forgrounde) {
+          const screen = notification?.data?.screen;
+          console.log(screen);
+
+          if (screen === 'Library') {
+            replace('bottomNav', {
+              screen: 'Library',
+              params: {
+                sender: notification?.data?.sender,
+                text: notification?.data?.text,
+              },
+            });
+          }
+        }
       },
     });
   }, []);
@@ -151,17 +167,20 @@ const Navigation = () => {
   useEffect(() => {
     const handler = (data: any) => {
       const route = navigationref.getCurrentRoute()?.name;
-      if (route === 'Library') return;
+
+      if (route === 'Library' && AppState.currentState === 'active') return;
+
       PushNotification.localNotification({
         channelId: 'default-channel',
         title: data.sender,
         message: data.text,
-        userInfo: {
+        data: {
           screen: 'Library',
           sender: data.sender,
           text: data.text,
         },
       });
+      console.log('crt');
     };
     socket.on(recieveMessage, handler);
     // console.log('Notification comes');
@@ -170,6 +189,7 @@ const Navigation = () => {
       socket.off(recieveMessage, handler);
     };
   }, []);
+
 
   return (
     <NavigationContainer ref={navigationref}>

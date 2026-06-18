@@ -21,6 +21,7 @@ const BookData = () => {
 
       <FlatList
         horizontal
+        showsHorizontalScrollIndicator={false}
         data={AllBooksData}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => {
@@ -33,7 +34,13 @@ const BookData = () => {
                   </View>
                 ))}
               </View>
-              <GridImage image={item.image} widthLoader={130} imagemaginH={0}  borderRadius={5} imageHeight={170}  />
+              <GridImage
+                image={item.image}
+                widthLoader={130}
+                imagemaginH={0}
+                borderRadius={5}
+                imageHeight={170}
+              />
 
               <Text style={styles.offer}>{item.offer}</Text>
             </View>

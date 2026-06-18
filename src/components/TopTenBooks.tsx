@@ -17,8 +17,8 @@ const TopTenBooks = () => {
   return (
     <View>
       <Text style={styles.trending}>Today's Trending</Text>
-
       <FlatList
+        showsHorizontalScrollIndicator={false}
         horizontal
         data={BooksRank}
         keyExtractor={item => item.id.toString()}

@@ -100,7 +100,6 @@ const SplashAnimation = () => {
     const result = await requestPermission();
     permissionResult.current = result;
     permissionDone.current = true;
-
     tryNavigate();
   };
 

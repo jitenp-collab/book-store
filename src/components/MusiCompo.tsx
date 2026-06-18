@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { primaryColor } from '../theme/Theme';
@@ -81,10 +81,11 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   bookIcon: {
-    marginStart: 20,
+    marginStart: 10,
+    marginBottom: 5,
   },
   readIcon: {
     color: 'white',
-    marginStart: 5,
+    // marginStart: 5,
   },
 });

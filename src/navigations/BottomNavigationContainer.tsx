@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { primaryColor, seconDaryColor } from '../theme/Theme';
 import StatusBarBackground from '../components/StatusBarBackground';
 import Header from '../components/Header';
-import Notification from '../components/Notification';
+// import Notification from '../components/Notification';
 
 const BottomNavigationContainer = ({ state, navigation }: any) => {
   const Tabs = [

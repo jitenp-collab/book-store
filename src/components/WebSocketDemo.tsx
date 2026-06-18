@@ -9,18 +9,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { primaryColor, seconDaryColor } from '../theme/Theme';
 import CustomeInput from '../ReusableCOmponent/CustomeInput';
-import { useIsFocused } from '@react-navigation/native';
-import {
-  recieveMessage,
-  sendMessage,
-} from '../const/Const';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
+import { recieveMessage, sendMessage } from '../const/Const';
 import { socket } from '../redux/Services/messageApi';
 import { useSelector } from 'react-redux';
 import { StoreState } from '../redux/store/Store';
-
+import PushNotification from 'react-native-push-notification';
 
 const WebSocketDemo = ({ notificationData }: any) => {
   const { presentUser }: any = useSelector((state: StoreState) => state.globle);
@@ -124,6 +121,13 @@ const WebSocketDemo = ({ notificationData }: any) => {
       });
     }
   }, [notificationData]);
+
+  useFocusEffect(
+    useCallback(() => {
+      PushNotification.cancelAllLocalNotifications();
+      console.log("Cansel all notification");
+    }, []),
+  );
 
   return (
     <KeyboardAvoidingView
